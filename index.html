@@ -361,11 +361,13 @@ function Scanner({ onFound, onClose }){
   const streamRef = React.useRef(null);
   const rafRef    = React.useRef(null);
   const mountedRef= React.useRef(true);
+  const fileInputRef = React.useRef(null);
   const [status,    setStatus]    = useState("starting");
   const [errorMsg,  setErrorMsg]  = useState("");
   const [frames,    setFrames]    = useState(0);   // scan-loop heartbeat
   const [manualMode,setManualMode]= useState(false);
   const [manualVal, setManualVal] = useState("");
+  const [photoMsg,  setPhotoMsg]  = useState(null); // null | "processing" | "notfound"
 
   useEffect(()=>{
     mountedRef.current = true;
@@ -457,6 +459,60 @@ function Scanner({ onFound, onClose }){
     stop();
     onFound(v);
   }
+  function openPhotoPicker(){
+    setPhotoMsg(null);
+    fileInputRef.current?.click();
+  }
+  async function handlePhoto(e){
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file
+    if(!file) return;
+    if(!window.jsQR){
+      setPhotoMsg(null);
+      setErrorMsg("QR decoder hasn't finished loading. Wait a moment and try again.");
+      setStatus("error");
+      return;
+    }
+    setPhotoMsg("processing");
+    let url;
+    try{
+      url = URL.createObjectURL(file);
+      const img = new Image();
+      await new Promise((res,rej)=>{
+        img.onload  = res;
+        img.onerror = ()=>rej(new Error("Could not read image file"));
+        img.src = url;
+      });
+      // Downscale very large photos (modern phones output 12MP+) — speeds up decode dramatically
+      let w = img.naturalWidth || img.width;
+      let h = img.naturalHeight || img.height;
+      const MAX = 2000;
+      if(Math.max(w,h) > MAX){
+        const k = MAX / Math.max(w,h);
+        w = Math.round(w*k); h = Math.round(h*k);
+      }
+      const cv = document.createElement("canvas");
+      cv.width = w; cv.height = h;
+      const ctx = cv.getContext("2d",{willReadFrequently:true});
+      ctx.drawImage(img, 0, 0, w, h);
+      const data = ctx.getImageData(0, 0, w, h);
+      const code = window.jsQR(data.data, data.width, data.height, {inversionAttempts:"attemptBoth"});
+      if(code?.data){
+        stop();
+        setPhotoMsg(null);
+        setStatus("found");
+        setTimeout(()=>onFound(code.data), 350);
+      } else {
+        setPhotoMsg("notfound");
+      }
+    }catch(err){
+      setPhotoMsg(null);
+      setErrorMsg(`Could not process photo: ${err?.message||"unknown error"}`);
+      setStatus("error");
+    }finally{
+      if(url) URL.revokeObjectURL(url);
+    }
+  }
 
   // pulsing scan indicator
   const pulse = status==="scanning" && (frames % 20 < 10);
@@ -496,7 +552,10 @@ function Scanner({ onFound, onClose }){
             <div className="alert alert-warn" style={{marginBottom:12}}>
               {errorMsg || "Camera not available."}
             </div>
-            <button className="btn btn-primary" onClick={()=>setManualMode(true)} style={{width:"100%"}}>
+            <button className="btn btn-primary" onClick={openPhotoPicker} style={{width:"100%",marginBottom:6}}>
+              📷 Take a photo instead
+            </button>
+            <button className="btn btn-ghost" onClick={()=>setManualMode(true)} style={{width:"100%"}}>
               ⌨ Enter part ID manually
             </button>
           </>
@@ -526,19 +585,38 @@ function Scanner({ onFound, onClose }){
                   <span style={{fontSize:48}}>✓</span>
                 </div>
               )}
+              {/* Photo processing overlay */}
+              {photoMsg==="processing" && (
+                <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.7)",
+                  display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:8,color:"#fff"}}>
+                  <span style={{fontSize:32}}>📷</span>
+                  <span style={{fontSize:13}}>Decoding photo…</span>
+                </div>
+              )}
             </div>
             <div style={{fontSize:12,color:"var(--ink3)",textAlign:"center",marginTop:10,minHeight:18}}>
               {status==="starting"?"Starting camera…":
                status==="scanning"?"Hold a QR code inside the frame":
                status==="found"?"QR code detected!":""}
             </div>
-            <button className="btn btn-ghost btn-sm" onClick={()=>setManualMode(true)}
-              style={{width:"100%",marginTop:8}}>
-              ⌨ Or enter part ID manually
-            </button>
+            {photoMsg==="notfound" && (
+              <div className="alert alert-warn" style={{marginTop:8,marginBottom:0,fontSize:12}}>
+                No QR code detected in that photo. Try another shot — get closer, hold steady, ensure good lighting.
+              </div>
+            )}
+            <div style={{display:"flex",gap:6,marginTop:8}}>
+              <button className="btn btn-primary btn-sm" onClick={openPhotoPicker} style={{flex:1}}>
+                📷 Take photo
+              </button>
+              <button className="btn btn-ghost btn-sm" onClick={()=>setManualMode(true)} style={{flex:1}}>
+                ⌨ Enter ID
+              </button>
+            </div>
           </>
         )}
         <canvas ref={canvasRef} style={{display:"none"}} />
+        <input ref={fileInputRef} type="file" accept="image/*" capture="environment"
+          style={{display:"none"}} onChange={handlePhoto} />
       </div>
     </div>
   );

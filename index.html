@@ -5,42 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PierreTrace — Parts Traceability</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Modern greyscale — cool, neutral, slightly cool-tinted */
-  --ink:#18181B;--ink2:#3F3F46;--ink3:#71717A;
-  --paper:#F4F4F5;--paper2:#E4E4E7;--paper3:#D4D4D8;
-  /* Orange accent retained */
-  --accent:#D4580A;--accent-h:#B84808;
-  --success:#3F7E48;--warn:#B8860B;--danger:#B83030;
+  --ink:#1A1814;--ink2:#3D3830;--ink3:#6B6358;
+  --paper:#F5F0E8;--paper2:#EDE7D9;--paper3:#DDD5C5;
+  --accent:#D4580A;--success:#3A7D44;--warn:#C4890A;--danger:#B83030;
   --r:6px;--rl:10px;
 }
-body{font-family:'Jost',sans-serif;background:var(--paper);color:var(--ink);font-size:14px;font-weight:400;letter-spacing:.005em}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:14px}
 .app{min-height:100vh;display:flex;flex-direction:column}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 24px;
-  background:#18181B;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:100}
-.logo{font-family:'Jost',sans-serif;font-size:15px;color:#F4F4F5;letter-spacing:.05em}
+  background:#1A1814;border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:100}
+.logo{font-family:'Syne',sans-serif;font-size:15px;color:#F5F0E8;letter-spacing:.05em}
 .logo span{color:var(--accent)}
 .nav-tabs{display:flex;gap:4px}
 .nav-tab{padding:6px 14px;border:none;border-radius:4px;background:transparent;color:#888;
-  font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;letter-spacing:.03em}
-.nav-tab:hover{background:#3F3F46;color:#E4E4E7}
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;letter-spacing:.03em}
+.nav-tab:hover{background:#3D3830;color:#EDE7D9}
 .nav-tab.active{background:var(--accent);color:#fff}
 .main{flex:1;padding:24px;max-width:1080px;margin:0 auto;width:100%}
-h1{font-family:'Jost',sans-serif;font-size:22px;font-weight:700;margin-bottom:18px}
-h3{font-family:'Jost',sans-serif;font-size:13px;font-weight:700;letter-spacing:.05em;
+h1{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:18px}
+h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.05em;
   text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
 .card{background:#fff;border:1px solid var(--paper3);border-radius:var(--rl);padding:18px;margin-bottom:14px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .stat{background:#fff;border:1px solid var(--paper3);border-radius:var(--rl);padding:14px 16px}
 .stat-l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:5px}
-.stat-n{font-family:'Jost',sans-serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
+.stat-n{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
 .stat-s{font-size:11px;color:var(--ink3);margin-top:3px}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:none;border-radius:var(--r);
-  font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#B84808}
 .btn-edit{background:#E8F0FD;color:#1A5A8A;border:1px solid #B5D4F4}.btn-edit:hover{background:#D4E8F8}
 .btn-ghost{background:var(--paper2);color:var(--ink2);border:1px solid var(--paper3)}.btn-ghost:hover{background:var(--paper3)}
@@ -50,10 +46,10 @@ h3{font-family:'Jost',sans-serif;font-size:13px;font-weight:700;letter-spacing:.
 .btn-icon{padding:4px 8px;font-size:13px;min-width:28px;justify-content:center}
 button:disabled{opacity:.35;cursor:not-allowed}
 .input{width:100%;padding:7px 10px;border:1px solid var(--paper3);border-radius:var(--r);
-  font-family:'Jost',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none}
+  font-family:'DM Sans',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none}
 .input:focus{border-color:var(--accent);background:#fff}
 .sel{width:100%;padding:7px 10px;border:1px solid var(--paper3);border-radius:var(--r);
-  font-family:'Jost',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none;cursor:pointer}
+  font-family:'DM Sans',sans-serif;font-size:13px;background:var(--paper);color:var(--ink);outline:none;cursor:pointer}
 .sel:focus{border-color:var(--accent);background:#fff}
 .label{display:block;font-size:11px;font-weight:500;text-transform:uppercase;
   letter-spacing:.05em;color:var(--ink3);margin-bottom:4px}
@@ -61,7 +57,7 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .field{flex:1;min-width:120px}
 .dim-wrap{display:flex;align-items:center;gap:4px}
 .dim-in{width:60px;padding:5px 6px;border:1px solid var(--paper3);border-radius:4px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;text-align:right;
+  font-family:'DM Mono',monospace;font-size:11px;text-align:right;
   background:var(--paper);color:var(--ink);outline:none}
 .dim-in:focus{border-color:var(--accent);background:#fff}
 .dim-sep{font-size:11px;color:var(--ink3)}
@@ -73,9 +69,9 @@ button:disabled{opacity:.35;cursor:not-allowed}
   color:var(--ink2);vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:hover td{background:#FFFBF8}
-.part-id{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--accent)}
+.part-id{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--accent)}
 .part-desc{font-size:11px;color:var(--ink3);margin-top:2px}
-.mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3)}
+.mono{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3)}
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
 .badge-green{background:#D6EDDA;color:#2D6A35}
 .badge-amber{background:#FDE9C0;color:#8A5F0A}
@@ -99,20 +95,20 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .proj-row{border:1px solid var(--paper3);border-radius:var(--rl);background:#fff;margin-bottom:8px;overflow:hidden}
 .proj-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;cursor:pointer}
 .proj-head:hover{background:#FFFBF8}
-.proj-title{font-family:'Jost',sans-serif;font-weight:700;font-size:14px}
+.proj-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px}
 .proj-sub{font-size:11px;color:var(--ink3);margin-top:2px}
 .proj-body{padding:12px 16px 14px;border-top:1px solid var(--paper2)}
 .edit-panel{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--r);padding:14px;margin-bottom:12px}
 .ws-card{background:#fff;border:1px solid var(--paper3);border-radius:var(--rl);padding:14px 16px;margin-bottom:10px}
-.ws-id{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--accent)}
+.ws-id{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--accent)}
 .ws-desc{font-size:13px;color:var(--ink2);margin-top:3px}
 .ws-sub{font-size:11px;color:var(--ink3);margin-top:2px}
 .note-in{padding:6px 8px;border:1px solid var(--paper3);border-radius:4px;
-  font-family:'Jost',sans-serif;font-size:12px;background:var(--paper);color:var(--ink);outline:none}
+  font-family:'DM Sans',sans-serif;font-size:12px;background:var(--paper);color:var(--ink);outline:none}
 .note-in:focus{border-color:var(--accent);background:#fff}
 .stage-li{display:flex;align-items:center;gap:8px;padding:10px 12px;
   background:#fff;border:1px solid var(--paper3);border-radius:var(--r);margin-bottom:6px}
-.stage-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink3);width:24px}
+.stage-num{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink3);width:24px}
 .color-swatch{width:24px;height:24px;border-radius:4px;border:1px solid var(--paper3);
   cursor:pointer;overflow:hidden;flex-shrink:0;position:relative}
 .color-swatch input[type=color]{position:absolute;top:-4px;left:-4px;width:140%;height:140%;
@@ -227,6 +223,8 @@ button:disabled{opacity:.35;cursor:not-allowed}
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.22/dist/occt-import-js.min.js"></script>
 
@@ -339,222 +337,97 @@ function materialName(materialId, materials){
   return materials.find(m=>m.id===materialId)?.name || null;
 }
 
-// ── SMC marker system: vector ID replacing QR codes ──────────────────────────
-// Triangle geometry from smc_logo.dxf (y flipped: DXF y-up → SVG y-down).
-// 3 triangles: center upright, right downside, left downside.
-// Each triangle has vertices A,B,C and trisection points D,E (on AB), F,G (on BC), H,I (on CA).
-const SMC_TRIANGLES = [
-  // Center upright (apex up)
-  { A:[ 3.1908, 0], B:[ 0,    -6.2394], C:[-3.1908, 0] },
-  // Right downside (apex down)
-  { A:[12.2088, 0], B:[ 6.2254, 5.9342], C:[ 3.1908, 0] },
-  // Left downside (apex down)
-  { A:[-12.2088,0], B:[-6.2254, 5.9342], C:[-3.1908, 0] },
-];
-const SMC_BASELINE = [ [[-15,0],[-12.2088,0]], [[12.2088,0],[15,0]] ];
-
-// 18 allowed interior line positions per triangle (user-confirmed: ih → eh).
-const MARKER_LINES = ["ag","af","bh","bi","cd","ce","df","dg","di","dh","ie","eh","ef","eg","fi","fh","gh","gi"];
-
-// Pre-enumerate all 988 valid subsets (size 0/1/2/3) in canonical lex order.
-const MARKER_SUBSETS = (() => {
-  const subs = [[]];
-  const N = MARKER_LINES.length; // 18
-  for (let i = 0; i < N; i++) subs.push([i]);
-  for (let i = 0; i < N; i++) for (let j = i+1; j < N; j++) subs.push([i, j]);
-  for (let i = 0; i < N; i++) for (let j = i+1; j < N; j++) for (let k = j+1; k < N; k++) subs.push([i, j, k]);
-  return subs;
-})();
-const MARKER_STATES_PER_TRI = MARKER_SUBSETS.length;   // 988
-const MARKER_TOTAL          = MARKER_STATES_PER_TRI ** 3; // 964,430,272
-// Bijective scramble so consecutive part numbers produce visually distinct markers.
-const MARKER_SCRAMBLE_P = 982451653; // prime, coprime to 988^3
-// Crockford base-32 (no I, L, O, U) for human-typable codes.
-const MARKER_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
-
-function markerSeqToCode(seq){
-  // Scramble first, then base-32 encode to 6 chars (~30 bits).
-  let n = (seq * MARKER_SCRAMBLE_P) % MARKER_TOTAL;
-  // safety: bring back to integer range
-  n = Math.abs(Math.round(n));
-  if(n >= MARKER_TOTAL) n = n % MARKER_TOTAL;
-  let s = "";
-  for(let i = 0; i < 6; i++){ s = MARKER_ALPHABET[n & 31] + s; n = Math.floor(n / 32); }
-  return s;
-}
-function markerCodeToInt(code){
-  if(!code) return -1;
-  const c = code.toUpperCase().replace(/[^0-9A-Z]/g,"");
-  if(c.length !== 6) return -1;
-  let n = 0;
-  for(const ch of c){
-    const v = MARKER_ALPHABET.indexOf(ch);
-    if(v < 0) return -1;
-    n = n * 32 + v;
-  }
-  return n;
-}
-function markerCodeToStates(code){
-  // Returns [s1, s2, s3] each in [0, 988), or null on error.
-  const n = markerCodeToInt(code);
-  if(n < 0) return null;
-  // Limit to total space (codes that map outside MARKER_TOTAL are still legal, just modulo'd)
-  let x = n % MARKER_TOTAL;
-  const s3 = x % MARKER_STATES_PER_TRI; x = Math.floor(x / MARKER_STATES_PER_TRI);
-  const s2 = x % MARKER_STATES_PER_TRI; x = Math.floor(x / MARKER_STATES_PER_TRI);
-  const s1 = x % MARKER_STATES_PER_TRI;
-  return [s1, s2, s3];
-}
-function lerp(p, q, t){ return [p[0] + (q[0]-p[0])*t, p[1] + (q[1]-p[1])*t]; }
-function trianglePoints(tri){
-  const {A,B,C} = tri;
-  return {
-    A, B, C,
-    D: lerp(A, B, 1/3), E: lerp(A, B, 2/3),
-    F: lerp(B, C, 1/3), G: lerp(B, C, 2/3),
-    H: lerp(C, A, 1/3), I: lerp(C, A, 2/3),
-  };
+// ── QR code display ───────────────────────────────────────────────────────────
+function QRImg({ value, size=60 }){
+  const el = React.useRef(null);
+  useEffect(()=>{
+    if(!el.current||!value||!window.QRCode) return;
+    el.current.innerHTML="";
+    new window.QRCode(el.current,{
+      text:value, width:size, height:size,
+      colorDark:"#1A1814", colorLight:"#ffffff",
+      correctLevel: window.QRCode.CorrectLevel.M,
+    });
+  },[value,size]);
+  return <div ref={el} style={{display:"inline-flex",lineHeight:0,borderRadius:4,overflow:"hidden"}} />;
 }
 
-// MarkerSVG — vector replacement for QR. Same-thickness lines; pure vector.
-// strokePx (optional): when provided, computes a stroke-width such that the
-// rendered strokes are *approximately* this many CSS pixels at the current size.
-// Otherwise falls back to strokeRatio × viewBox-width (relative to vector units).
-function MarkerSVG({ code, size=80, strokeRatio=0.045, strokePx=null, color="#18181B" }){
-  if(!code) return null;
-  const states = markerCodeToStates(code);
-  if(!states) return null;
-  const VB_X=-16.5, VB_Y=-7.2, VB_W=33, VB_H=14.4;
-  const sw = (strokePx !== null && strokePx !== undefined)
-    ? strokePx * (VB_W / size)        // px → viewBox units at the rendered size
-    : VB_W * strokeRatio;
+// ── Barcode scanner modal ─────────────────────────────────────────────────────
+function Scanner({ onFound, onClose }){
+  const videoRef  = React.useRef(null);
+  const canvasRef = React.useRef(null);
+  const streamRef = React.useRef(null);
+  const rafRef    = React.useRef(null);
+  const [status,  setStatus]  = useState("starting");
 
-  const triPaths = SMC_TRIANGLES.map((tri,i)=>{
-    const pts = trianglePoints(tri);
-    const subset = MARKER_SUBSETS[states[i]] || [];
-    return {
-      outline: `M ${tri.A[0]} ${tri.A[1]} L ${tri.B[0]} ${tri.B[1]} L ${tri.C[0]} ${tri.C[1]} Z`,
-      interior: subset.map(idx=>{
-        const ln = MARKER_LINES[idx];
-        const p1 = pts[ln[0].toUpperCase()];
-        const p2 = pts[ln[1].toUpperCase()];
-        return { p1, p2 };
-      }),
-    };
-  });
+  useEffect(()=>{
+    if(!navigator.mediaDevices?.getUserMedia){ setStatus("error"); return; }
+    navigator.mediaDevices.getUserMedia({video:{facingMode:"environment",width:{ideal:1280}}})
+      .then(stream=>{
+        streamRef.current=stream;
+        if(videoRef.current){ videoRef.current.srcObject=stream; videoRef.current.play(); }
+        setStatus("scanning");
+        rafRef.current=requestAnimationFrame(tick);
+      })
+      .catch(()=>setStatus("error"));
 
-  return (
-    <svg viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
-      width={size} height={size * VB_H / VB_W}
-      xmlns="http://www.w3.org/2000/svg"
-      style={{display:"block"}}>
-      <g fill="none" stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
-        {/* Baseline-extension segments */}
-        {SMC_BASELINE.map(([a,b],i)=>(
-          <line key={"bl"+i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} />
-        ))}
-        {/* 3 triangles */}
-        {triPaths.map((t,i)=>(
-          <g key={"t"+i}>
-            <path d={t.outline} />
-            {t.interior.map((l,j)=>(
-              <line key={j} x1={l.p1[0]} y1={l.p1[1]} x2={l.p2[0]} y2={l.p2[1]} />
-            ))}
-          </g>
-        ))}
-      </g>
-    </svg>
-  );
-}
-
-// Build a downloadable SVG string from a marker code and trigger browser download.
-function downloadMarkerSVG(code, partLabel){
-  if(!code) return;
-  const states = markerCodeToStates(code);
-  if(!states) return;
-  const VB_X=-16.5, VB_Y=-7.2, VB_W=33, VB_H=14.4;
-  const sw = VB_W * 0.045;
-  let body = "";
-  // baseline
-  for(const [a,b] of SMC_BASELINE){
-    body += `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>`;
-  }
-  // triangles + interior lines
-  SMC_TRIANGLES.forEach((tri,i)=>{
-    body += `<path d="M ${tri.A[0]} ${tri.A[1]} L ${tri.B[0]} ${tri.B[1]} L ${tri.C[0]} ${tri.C[1]} Z"/>`;
-    const pts = trianglePoints(tri);
-    const subset = MARKER_SUBSETS[states[i]] || [];
-    for(const idx of subset){
-      const ln = MARKER_LINES[idx];
-      const p1 = pts[ln[0].toUpperCase()];
-      const p2 = pts[ln[1].toUpperCase()];
-      body += `<line x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}"/>`;
+    function tick(){
+      const v=videoRef.current, c=canvasRef.current;
+      if(!v||!c){ rafRef.current=requestAnimationFrame(tick); return; }
+      if(v.readyState===v.HAVE_ENOUGH_DATA){
+        c.width=v.videoWidth; c.height=v.videoHeight;
+        const ctx=c.getContext("2d");
+        ctx.drawImage(v,0,0,c.width,c.height);
+        const img=ctx.getImageData(0,0,c.width,c.height);
+        const code=window.jsQR&&window.jsQR(img.data,img.width,img.height,{inversionAttempts:"dontInvert"});
+        if(code?.data){ stop(); setStatus("found"); setTimeout(()=>onFound(code.data),350); return; }
+      }
+      rafRef.current=requestAnimationFrame(tick);
     }
-  });
-  const safeLabel = (partLabel||"part").replace(/[^a-zA-Z0-9_-]/g,"_");
-  const svgContent =
-    `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n` +
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${VB_X} ${VB_Y} ${VB_W} ${VB_H}" width="200mm" height="${(200*VB_H/VB_W).toFixed(2)}mm">\n` +
-    `  <title>SMC marker ${code} — ${partLabel||""}</title>\n` +
-    `  <g fill="none" stroke="#000000" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">\n` +
-    `    ${body}\n` +
-    `  </g>\n` +
-    `</svg>\n`;
-  const blob = new Blob([svgContent], {type:"image/svg+xml"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `marker-${code}-${safeLabel}.svg`;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+    return stop;
+  },[]);
 
-// MarkerSearch — manual code entry modal (replaces camera scanner).
-function MarkerSearch({ onFound, onClose }){
-  const [code, setCode]   = useState("");
-  const [error, setError] = useState("");
-  const inputRef = React.useRef(null);
-
-  useEffect(()=>{ inputRef.current?.focus(); },[]);
-
-  function submit(){
-    const c = code.trim().toUpperCase().replace(/[^0-9A-Z]/g,"");
-    if(c.length !== 6){ setError("Code must be exactly 6 characters (numbers + letters)."); return; }
-    setError("");
-    onFound(c);
+  function stop(){
+    if(rafRef.current) cancelAnimationFrame(rafRef.current);
+    streamRef.current?.getTracks().forEach(t=>t.stop());
   }
+  function cancel(){ stop(); onClose(); }
 
   return (
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.55)",zIndex:3000,
-      display:"flex",alignItems:"center",justifyContent:"center",padding:14}}>
-      <div style={{background:"#fff",borderRadius:12,padding:22,width:"min(94vw,420px)",
-        boxShadow:"0 12px 40px rgba(0,0,0,.3)"}}>
-        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-          <span style={{fontSize:22}}>△</span>
-          <h3 style={{margin:0,fontSize:14,letterSpacing:".04em"}}>Find part by marker code</h3>
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.88)",zIndex:3000,
+      display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <div style={{background:"#fff",borderRadius:14,padding:20,width:"min(92vw,400px)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+          <span style={{fontFamily:"'Syne',sans-serif",fontWeight:700,fontSize:15}}>Scan part QR code</span>
+          <button className="btn btn-ghost btn-sm" onClick={cancel}>✕ Cancel</button>
         </div>
-        <p style={{fontSize:12,color:"var(--ink3)",lineHeight:1.55,marginBottom:14}}>
-          Enter the 6-character code printed on the part's physical template. Letters and numbers — uppercase only, no I / L / O / U.
-        </p>
-        <input ref={inputRef} className="input" value={code}
-          placeholder="K3F2A9"
-          maxLength={8}
-          style={{fontFamily:"'JetBrains Mono',monospace",fontSize:22,fontWeight:700,
-            textAlign:"center",letterSpacing:".15em",color:"var(--accent)"}}
-          onChange={e=>{ setError(""); setCode(e.target.value.toUpperCase()); }}
-          onKeyDown={e=>{ if(e.key==="Enter") submit(); }} />
-        {error && <div className="err" style={{marginTop:8}}>⚠ {error}</div>}
-
-        {code.trim().length===6 && !error && (
-          <div style={{marginTop:14,padding:14,background:"var(--paper)",borderRadius:8,
-            border:"1px solid var(--paper3)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-            <MarkerSVG code={code.trim().toUpperCase()} size={180} />
+        {status==="error" && (
+          <div className="alert alert-warn" style={{marginBottom:0}}>
+            Camera not available — check browser permissions and that you're on HTTPS or localhost.
           </div>
         )}
-
-        <div style={{display:"flex",gap:8,justifyContent:"flex-end",marginTop:16}}>
-          <button className="btn btn-ghost" onClick={onClose}>Cancel</button>
-          <button className="btn btn-primary" onClick={submit}>Find part</button>
+        {status!=="error" && (
+          <div style={{position:"relative",borderRadius:10,overflow:"hidden",background:"#111",aspectRatio:"1"}}>
+            <video ref={videoRef} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} playsInline muted />
+            {/* target frame */}
+            <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
+              <div style={{width:"55%",aspectRatio:"1",border:`3px solid ${status==="found"?"#3A7D44":"rgba(255,255,255,.85)"}`,
+                borderRadius:12,transition:"border-color .25s",
+                boxShadow:"0 0 0 9999px rgba(0,0,0,.45)"}} />
+            </div>
+            {status==="found" && (
+              <div style={{position:"absolute",inset:0,background:"rgba(58,125,68,.25)",
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <span style={{fontSize:48}}>✓</span>
+              </div>
+            )}
+          </div>
+        )}
+        <canvas ref={canvasRef} style={{display:"none"}} />
+        <div style={{fontSize:12,color:"var(--ink3)",textAlign:"center",marginTop:10,minHeight:18}}>
+          {status==="starting"?"Starting camera…":
+           status==="scanning"?"Align a part QR code inside the frame":
+           status==="found"?"QR code detected!":""}
         </div>
       </div>
     </div>
@@ -692,10 +565,10 @@ function WaffleChart({ parts:rawParts, stages, projects, subprojects, materials 
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:"6px 18px",fontSize:12,color:"var(--ink3)"}}>
             <div><strong style={{color:"var(--ink2)"}}>Type:</strong> {shown.type || "—"}</div>
-            <div><strong style={{color:"var(--ink2)"}}>Dimensions:</strong> {(shown.length||shown.width||shown.height) ? <span style={{fontFamily:"'JetBrains Mono',monospace"}}>{`${shown.length||"—"} × ${shown.width||"—"} × ${shown.height||"—"} mm`}</span> : "—"}</div>
+            <div><strong style={{color:"var(--ink2)"}}>Dimensions:</strong> {(shown.length||shown.width||shown.height) ? <span style={{fontFamily:"'DM Mono',monospace"}}>{`${shown.length||"—"} × ${shown.width||"—"} × ${shown.height||"—"} mm`}</span> : "—"}</div>
             {(() => {
               const w = getPartWeight(shown, materials);
-              return <div><strong style={{color:"var(--ink2)"}}>Weight:</strong> {w!==null ? <span style={{fontFamily:"'JetBrains Mono',monospace",color:"var(--accent)",fontWeight:600}}>{formatWeight(w)}</span> : "—"}</div>;
+              return <div><strong style={{color:"var(--ink2)"}}>Weight:</strong> {w!==null ? <span style={{fontFamily:"'DM Mono',monospace",color:"var(--accent)",fontWeight:600}}>{formatWeight(w)}</span> : "—"}</div>;
             })()}
             <div><strong style={{color:"var(--ink2)"}}>Material:</strong> {materialName(shown.materialId, materials) || "—"}</div>
             <div><strong style={{color:"var(--ink2)"}}>OK to make:</strong> {shown.okToManufacture ? "Yes" : "No"}</div>
@@ -900,7 +773,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
             <div className="field" style={{maxWidth:120}}><label className="label">Project ID *</label>
               <input className="input" placeholder="e.g. GH" value={addForm.projectCode}
                 onChange={e=>{setAddErr("");setAddForm(f=>({...f,projectCode:e.target.value.toUpperCase()}));}}
-                style={{fontFamily:"'JetBrains Mono',monospace"}} onKeyDown={e=>e.key==="Enter"&&addProject()} /></div>
+                style={{fontFamily:"'DM Mono',monospace"}} onKeyDown={e=>e.key==="Enter"&&addProject()} /></div>
             <div className="field"><label className="label">Client</label>
               <input className="input" placeholder="e.g. Dupont family" value={addForm.client}
                 onChange={e=>setAddForm(f=>({...f,client:e.target.value}))} onKeyDown={e=>e.key==="Enter"&&addProject()} /></div>
@@ -934,7 +807,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
             <div style={{padding:12,background:"var(--paper)",borderRadius:8,marginBottom:10,border:"1px solid var(--paper3)"}}>
               <div style={{fontWeight:500,fontSize:13,marginBottom:4}}>Option 1 — Move all existing parts into the new subproject</div>
               <div style={{fontSize:11,color:"var(--ink3)",marginBottom:10}}>
-                Existing parts join "<strong>{migrate.newSub.name}</strong>" [<span style={{fontFamily:"'JetBrains Mono',monospace"}}>{migrate.newSub.subCode}</span>]
+                Existing parts join "<strong>{migrate.newSub.name}</strong>" [<span style={{fontFamily:"'DM Mono',monospace"}}>{migrate.newSub.subCode}</span>]
               </div>
               <button className="btn btn-primary btn-sm" onClick={migrateMoveToNew}>Move to {migrate.newSub.subCode}</button>
             </div>
@@ -949,7 +822,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
                   onChange={e=>setMigrate(m=>({...m,keepNewName:e.target.value,error:""}))} style={{flex:1}} />
                 <input className="input" placeholder="ID" value={migrate.keepNewCode}
                   onChange={e=>setMigrate(m=>({...m,keepNewCode:e.target.value.toUpperCase(),error:""}))}
-                  style={{width:80,fontFamily:"'JetBrains Mono',monospace"}} />
+                  style={{width:80,fontFamily:"'DM Mono',monospace"}} />
               </div>
               <button className="btn btn-primary btn-sm" onClick={migrateMoveToSeparate}>Create both subprojects</button>
             </div>
@@ -978,7 +851,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
               <div>
                 <div className="proj-title">
                   {proj.name}
-                  {proj.projectCode && <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}]</span>}
+                  {proj.projectCode && <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}]</span>}
                 </div>
                 <div className="proj-sub">
                   {proj.client||"—"}
@@ -1008,7 +881,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
                       <div className="field" style={{maxWidth:120}}><label className="label">Project ID</label>
                         <input className="input" value={editForm.projectCode}
                           onChange={e=>{setEditErr("");setEditForm(f=>({...f,projectCode:e.target.value.toUpperCase()}));}}
-                          style={{fontFamily:"'JetBrains Mono',monospace"}} /></div>
+                          style={{fontFamily:"'DM Mono',monospace"}} /></div>
                       <div className="field"><label className="label">Client</label>
                         <input className="input" value={editForm.client}
                           onChange={e=>setEditForm(f=>({...f,client:e.target.value}))} /></div>
@@ -1042,9 +915,9 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
                             background:"var(--paper)",borderRadius:8,border:"1px solid var(--paper3)"}}
                             onClick={()=>{ if(!isEdS) setOpenSub(isOp?null:s.id); }}>
                             <div>
-                              <div style={{fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:13}}>
+                              <div style={{fontFamily:"'Syne',sans-serif",fontWeight:700,fontSize:13}}>
                                 ↳ {s.name}
-                                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}-{s.subCode}]</span>
+                                <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}-{s.subCode}]</span>
                               </div>
                               <div style={{fontSize:11,color:"var(--ink3)",marginTop:2}}>
                                 {list.length} part{list.length!==1?"s":""} · created {new Date(s.createdAt).toLocaleDateString("en-GB")}
@@ -1071,7 +944,7 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
                                     <div style={{width:120}}><label className="label">Subproject ID</label>
                                       <input className="input" value={editSubForm.subCode}
                                         onChange={e=>{setEditSubErr("");setEditSubForm(f=>({...f,subCode:e.target.value.toUpperCase()}));}}
-                                        style={{fontFamily:"'JetBrains Mono',monospace"}} /></div>
+                                        style={{fontFamily:"'DM Mono',monospace"}} /></div>
                                     <button className="btn btn-success btn-sm" onClick={saveEditSub}>Save</button>
                                     <button className="btn btn-ghost btn-sm" onClick={()=>setEditSubId(null)}>Cancel</button>
                                   </div>
@@ -1113,14 +986,14 @@ function ManagerPage({ stages, projects, setProjects, subprojects, setSubproject
                       <div style={{width:120}}><label className="label">Subproject ID *</label>
                         <input className="input" placeholder="e.g. B2" value={subAddForm.subCode}
                           onChange={e=>{setSubAddErr("");setSubAddForm(f=>({...f,subCode:e.target.value.toUpperCase()}));}}
-                          style={{fontFamily:"'JetBrains Mono',monospace"}}
+                          style={{fontFamily:"'DM Mono',monospace"}}
                           onKeyDown={e=>e.key==="Enter"&&submitAddSub(proj.id)} /></div>
                       <button className="btn btn-primary btn-sm" onClick={()=>submitAddSub(proj.id)}>Create</button>
                       <button className="btn btn-ghost btn-sm" onClick={cancelAddSub}>Cancel</button>
                     </div>
                     {subAddErr && <div className="err">⚠ {subAddErr}</div>}
                     <div style={{fontSize:11,color:"var(--ink3)",marginTop:6}}>
-                      Part IDs will become <span style={{fontFamily:"'JetBrains Mono',monospace"}}>{proj.projectCode}-{subAddForm.subCode||"??"}-3ST</span>
+                      Part IDs will become <span style={{fontFamily:"'DM Mono',monospace"}}>{proj.projectCode}-{subAddForm.subCode||"??"}-3ST</span>
                     </div>
                   </div>
                 ) : (
@@ -1174,7 +1047,7 @@ function TypeSelect({ typeName, typeCode, partTypes, onChange, width=82 }){
           borderRadius:"var(--r)",
           background: open ? "#fff" : "var(--paper)",
           cursor:"pointer", textAlign:"left",
-          fontFamily:"'JetBrains Mono',monospace",
+          fontFamily:"'DM Mono',monospace",
           fontSize:13, fontWeight:typeCode?700:500,
           color: typeCode ? "var(--accent)" : "var(--ink3)",
           display:"flex", justifyContent:"space-between", alignItems:"center", gap:6,
@@ -1209,7 +1082,7 @@ function TypeSelect({ typeName, typeCode, partTypes, onChange, width=82 }){
                 onMouseEnter={e=>e.currentTarget.style.background="var(--paper)"}
                 onMouseLeave={e=>e.currentTarget.style.background=isSel?"var(--paper)":"#fff"}>
                 <span style={{color:"var(--ink)",fontWeight:isSel?500:400}}>{t.name}</span>
-                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,fontWeight:700,
+                <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,fontWeight:700,
                   color:"var(--accent)",background:"var(--paper2)",padding:"2px 7px",borderRadius:3}}>[{t.code}]</span>
               </div>
             );
@@ -1226,7 +1099,7 @@ function TypeSelect({ typeName, typeCode, partTypes, onChange, width=82 }){
 }
 
 // ── Designer ──────────────────────────────────────────────────────────────────
-function DesignerPage({ stages, projects, subprojects, parts, setParts, partTypes, materials, markerSeq, setMarkerSeq }){
+function DesignerPage({ stages, projects, subprojects, parts, setParts, partTypes, materials }){
   const [openProj,  setOpenProj]  = useState(null);
   const [openSub,   setOpenSub]   = useState(null);
   const [drafts,    setDrafts]    = useState({});       // scopeKey -> draft
@@ -1260,10 +1133,6 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
     );
     if(dup){ setErr(scopeKey,`"${suf}${d.typeCode}" already exists in this scope.`); return; }
     setErr(scopeKey,"");
-    // Generate a unique marker code, skipping any already-used codes (rare).
-    const used = new Set(parts.filter(p=>p.markerCode).map(p=>p.markerCode));
-    let seq = markerSeq, code;
-    do { code = markerSeqToCode(seq++); } while(used.has(code));
     setParts(prev=>[...prev,{
       id:uid(), projectId, subprojectId:subprojectId||null,
       suffix:suf, type:d.type, typeCode:d.typeCode,
@@ -1272,9 +1141,7 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
       materialId: d.materialId || null,
       notes:d.notes.trim(), okToManufacture:false,
       stageId:null, comments:[], createdAt:new Date().toISOString(),
-      markerCode: code,
     }]);
-    setMarkerSeq(seq);
     // reset draft for this scope, keep default material
     setDrafts(prev=>({...prev,[scopeKey]:emptyDraft(defaultMat)}));
   }
@@ -1416,33 +1283,14 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
                   />
                 </td>
                 <td>
-                  <div style={{display:"flex",alignItems:"center",gap:3,marginBottom:2}}>
-                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink3)",whiteSpace:"nowrap"}}>{fullPrefix}</span>
+                  <div style={{display:"flex",alignItems:"center",gap:3}}>
+                    <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"var(--ink3)",whiteSpace:"nowrap"}}>{fullPrefix}</span>
                     <input value={part.suffix||""} placeholder="ID"
                       onChange={e=>upd(part.id,"suffix",e.target.value.toUpperCase())}
                       style={{width:52,padding:"4px 5px",border:"1px solid var(--paper3)",borderRadius:4,
-                        fontFamily:"'JetBrains Mono',monospace",fontSize:12,textTransform:"uppercase",
+                        fontFamily:"'DM Mono',monospace",fontSize:12,textTransform:"uppercase",
                         background:"var(--paper)",color:"var(--accent)",fontWeight:700,outline:"none"}} />
                   </div>
-                  {part.markerCode && (
-                    <div style={{display:"flex",alignItems:"center",gap:5,marginTop:2}}>
-                      <MarkerSVG code={part.markerCode} size={38} />
-                      <button
-                        title="Click to copy marker code"
-                        onClick={e=>{ e.stopPropagation(); navigator.clipboard?.writeText(part.markerCode); }}
-                        style={{fontFamily:"'JetBrains Mono',monospace",fontSize:10,
-                          background:"none",border:"none",cursor:"pointer",
-                          color:"var(--ink3)",padding:"2px 4px",letterSpacing:".06em"}}>
-                        {part.markerCode}
-                      </button>
-                      <button
-                        title="Download marker as SVG (for printing template)"
-                        onClick={e=>{ e.stopPropagation(); downloadMarkerSVG(part.markerCode, getPartId(part, projects, subprojects)); }}
-                        style={{background:"none",border:"none",cursor:"pointer",fontSize:11,padding:"2px",color:"var(--ink3)"}}>
-                        ⤓
-                      </button>
-                    </div>
-                  )}
                 </td>
                 <td>
                   <TypeSelect typeName={part.type} typeCode={part.typeCode} partTypes={partTypes}
@@ -1461,14 +1309,14 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
               </td>
               <td style={{borderTop:"2px dashed var(--paper3)"}}>
                 <div style={{display:"flex",alignItems:"center",gap:3}}>
-                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--ink3)",whiteSpace:"nowrap"}}>{fullPrefix}</span>
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"var(--ink3)",whiteSpace:"nowrap"}}>{fullPrefix}</span>
                   <input value={draft.suffix} placeholder="ID *"
                     onChange={e=>{ setErr(scopeKey,""); updateDraft(scopeKey,defaultMat,"suffix",e.target.value.toUpperCase()); }}
                     onKeyDown={e=>{ if(e.key==="Enter") addPart(scopeKey,projectId,subprojectId,defaultMat); }}
                     style={{width:52,padding:"4px 5px",
                       border: err ? "1px solid var(--danger)" : "1px solid var(--paper3)",
                       borderRadius:4,
-                      fontFamily:"'JetBrains Mono',monospace",fontSize:12,textTransform:"uppercase",
+                      fontFamily:"'DM Mono',monospace",fontSize:12,textTransform:"uppercase",
                       background:"#fff",color:"var(--accent)",fontWeight:700,outline:"none"}} />
                 </div>
               </td>
@@ -1567,7 +1415,7 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
               <div>
                 <div className="proj-title">
                   {proj.name}
-                  {proj.projectCode && <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}]</span>}
+                  {proj.projectCode && <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}]</span>}
                 </div>
                 <div className="proj-sub">
                   {proj.client||"—"}
@@ -1597,9 +1445,9 @@ function DesignerPage({ stages, projects, subprojects, parts, setParts, partType
                           padding:"10px 12px",background:"var(--paper)",borderRadius:8,border:"1px solid var(--paper3)"}}
                           onClick={()=>setOpenSub(isSOp?null:s.id)}>
                         <div>
-                          <div style={{fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:13}}>
+                          <div style={{fontFamily:"'Syne',sans-serif",fontWeight:700,fontSize:13}}>
                             ↳ {s.name}
-                            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}-{s.subCode}]</span>
+                            <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"var(--accent)",marginLeft:8,fontWeight:400}}>[{proj.projectCode}-{s.subCode}]</span>
                           </div>
                           <div style={{fontSize:11,color:"var(--ink3)",marginTop:2}}>
                             {subPts.length} part{subPts.length!==1?"s":""}
@@ -1680,12 +1528,12 @@ function STPViewer({ partId, fileName, fileSize }){
 
   return (
     <div ref={containerRef} style={{position:"relative",width:"100%",height:300,
-      background:"#18181B",borderRadius:8,overflow:"hidden",border:"1px solid var(--paper3)"}}>
+      background:"#1A1814",borderRadius:8,overflow:"hidden",border:"1px solid var(--paper3)"}}>
       <canvas ref={canvasRef} style={{display:"block",width:"100%",height:"100%",
         cursor: status==="ready" ? "grab" : "default"}} />
       {status!=="ready" && (
         <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
-          color:"#F4F4F5",fontSize:12,padding:14,textAlign:"center"}}>
+          color:"#F5F0E8",fontSize:12,padding:14,textAlign:"center"}}>
           {status==="loading" && <span>Loading 3D file…</span>}
           {status==="parsing" && <span>Parsing STEP geometry — large files may take 10-30 s…</span>}
           {status==="notfound" && <span>3D file missing from local storage. Re-upload in the Designer page.</span>}
@@ -1694,7 +1542,7 @@ function STPViewer({ partId, fileName, fileSize }){
       )}
       {status==="ready" && fileName && (
         <div style={{position:"absolute",left:8,bottom:6,fontSize:10,color:"rgba(245,240,232,.65)",
-          fontFamily:"'JetBrains Mono',monospace",pointerEvents:"none"}}>
+          fontFamily:"'DM Mono',monospace",pointerEvents:"none"}}>
           {fileName} · {(fileSize/1024).toFixed(0)} KB
         </div>
       )}
@@ -1922,7 +1770,7 @@ function LoadFileButton({ part, onUploaded, onCleared }){
         onChange={pick} style={{display:"none"}} />
       <button
         className={`btn btn-sm ${hasFile?"btn-success":"btn-ghost"}`}
-        style={{padding:"5px 8px",fontSize:11,minHeight:0,minWidth:0,fontFamily:hasFile?"'JetBrains Mono',monospace":undefined}}
+        style={{padding:"5px 8px",fontSize:11,minHeight:0,minWidth:0,fontFamily:hasFile?"'DM Mono',monospace":undefined}}
         onClick={()=>inputRef.current?.click()}
         disabled={busy}
         title={hasFile ? `Replace · ${part.stpFile.name} (${(part.stpFile.size/1024).toFixed(0)} KB)` : "Load .stp / .step file"}>
@@ -1974,9 +1822,9 @@ function QCModal({ part, fromStage, toStage, mode, partLabel, onConfirm, onCance
         </div>
         <p style={{fontSize:13,color:"var(--ink2)",lineHeight:1.55,marginBottom:14}}>
           {isFinalize ? (
-            <>Complete the final checks below to mark <strong style={{fontFamily:"'JetBrains Mono',monospace",color:"var(--accent)"}}>{partLabel}</strong> as <strong>Complete</strong> at <strong>{fromStage?.name}</strong>.</>
+            <>Complete the final checks below to mark <strong style={{fontFamily:"'DM Mono',monospace",color:"var(--accent)"}}>{partLabel}</strong> as <strong>Complete</strong> at <strong>{fromStage?.name}</strong>.</>
           ) : (
-            <>Complete the checks below before advancing <strong style={{fontFamily:"'JetBrains Mono',monospace",color:"var(--accent)"}}>{partLabel}</strong> from <strong>{fromStage?.name}</strong> to <strong>{toStage?.name||"the next stage"}</strong>.</>
+            <>Complete the checks below before advancing <strong style={{fontFamily:"'DM Mono',monospace",color:"var(--accent)"}}>{partLabel}</strong> from <strong>{fromStage?.name}</strong> to <strong>{toStage?.name||"the next stage"}</strong>.</>
           )}
         </p>
 
@@ -2060,10 +1908,10 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
     stageFilter==="none" ? projFiltered.filter(p=>!p.stageId) :
     projFiltered.filter(p=>p.stageId===stageFilter);
 
-  function handleScan(code){
+  function handleScan(value){
     setScanning(false);
-    const found = parts.find(p=>p.markerCode===code);
-    if(!found){ alert(`No part found for marker code "${code}".`); return; }
+    const found = parts.find(p=>p.id===value);
+    if(!found){ alert("No part found for this QR code."); return; }
     // reset filters so the part is visible, then expand + scroll
     setProjFilter("all");
     setStageFilter("all");
@@ -2199,7 +2047,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
 
   return (
     <div>
-      {scanning && <MarkerSearch onFound={handleScan} onClose={()=>setScanning(false)} />}
+      {scanning && <Scanner onFound={handleScan} onClose={()=>setScanning(false)} />}
       {qcModal && (() => {
         const part = parts.find(p=>p.id===qcModal.partId);
         if(!part) return null;
@@ -2224,7 +2072,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
         <h1 style={{marginBottom:0}}>Workshop</h1>
         <button className="btn btn-primary" onClick={()=>setScanning(true)}
           style={{gap:7,fontSize:13,padding:"8px 16px"}}>
-          <span style={{fontSize:17,lineHeight:1}}>△</span> Find part
+          <span style={{fontSize:17,lineHeight:1}}>⬛</span> Scan QR
         </button>
       </div>
 
@@ -2434,35 +2282,21 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
                   </div>
                 )}
 
-                {/* Marker + info side-by-side */}
-                <div style={{display:"flex",gap:16,marginBottom:12,alignItems:"flex-start",flexWrap:"wrap"}}>
-                  <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:6,
-                    padding:"10px 14px",background:"var(--paper)",borderRadius:8,border:"1px solid var(--paper3)",minWidth:160}}>
-                    {part.markerCode ? (
-                      <>
-                        <MarkerSVG code={part.markerCode} size={140} strokePx={2} />
-                        <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:14,letterSpacing:".15em",
-                          color:isOnHold?"var(--ink3)":"var(--accent)",fontWeight:700}}>
-                          {part.markerCode}
-                        </span>
-                        <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:10,color:"var(--ink3)"}}>
-                          {getPartId(part,projects,subprojects)}
-                        </span>
-                        <button className="btn btn-ghost btn-sm" style={{fontSize:10,padding:"3px 8px",marginTop:2}}
-                          onClick={()=>downloadMarkerSVG(part.markerCode, getPartId(part,projects,subprojects))}>
-                          ⤓ Download SVG
-                        </button>
-                      </>
-                    ) : (
-                      <span style={{fontSize:11,color:"var(--ink3)",fontStyle:"italic"}}>No marker assigned</span>
-                    )}
+                {/* QR + info side-by-side */}
+                <div style={{display:"flex",gap:16,marginBottom:12,alignItems:"flex-start"}}>
+                  <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:4,
+                    padding:"8px",background:"var(--paper)",borderRadius:8,border:"1px solid var(--paper3)"}}>
+                    <QRImg value={part.id} size={100} />
+                    <span style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:isOnHold?"var(--ink3)":"var(--accent)",fontWeight:700}}>
+                      {getPartId(part,projects,subprojects)}
+                    </span>
                   </div>
 
                   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px 14px",flex:1,fontSize:13}}>
                     <div><span style={{fontSize:10,textTransform:"uppercase",letterSpacing:".05em",color:"var(--ink3)",display:"block",marginBottom:2}}>Description</span>{part.description||<span style={{color:"var(--ink3)"}}>—</span>}</div>
                     <div><span style={{fontSize:10,textTransform:"uppercase",letterSpacing:".05em",color:"var(--ink3)",display:"block",marginBottom:2}}>Type</span>{part.type||<span style={{color:"var(--ink3)"}}>—</span>}</div>
                     <div><span style={{fontSize:10,textTransform:"uppercase",letterSpacing:".05em",color:"var(--ink3)",display:"block",marginBottom:2}}>Dimensions</span>
-                      <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11}}>
+                      <span style={{fontFamily:"'DM Mono',monospace",fontSize:11}}>
                         {(part.length||part.width||part.height)?`${part.length||"—"} × ${part.width||"—"} × ${part.height||"—"} mm`:"—"}
                       </span>
                     </div>
@@ -2471,7 +2305,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
                       return (
                         <div><span style={{fontSize:10,textTransform:"uppercase",letterSpacing:".05em",color:"var(--ink3)",display:"block",marginBottom:2}}>Weight</span>
                           {w!==null
-                            ? <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,color:"var(--accent)",fontWeight:700}}>{formatWeight(w)}</span>
+                            ? <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:"var(--accent)",fontWeight:700}}>{formatWeight(w)}</span>
                             : <span style={{color:"var(--ink3)"}}>—</span>}
                         </div>
                       );
@@ -2514,7 +2348,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
                         <div style={{fontSize:11,fontWeight:500,color:"#2D6A35",marginBottom:4,
                           display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                           <span>✓ {entry.stageName}</span>
-                          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:10,color:"var(--ink3)",fontWeight:400}}>
+                          <span style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:"var(--ink3)",fontWeight:400}}>
                             {new Date(entry.date).toLocaleDateString("en-GB")}
                           </span>
                         </div>
@@ -2536,7 +2370,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
                   <div style={{marginBottom:8,background:"var(--paper)",borderRadius:6,padding:"6px 8px"}}>
                     {part.comments.map((c,i)=>(
                       <div key={i} style={{fontSize:11,color:"var(--ink3)",padding:"3px 0",borderBottom:"1px solid var(--paper2)"}}>
-                        <span style={{color:"var(--accent)",fontFamily:"'JetBrains Mono',monospace"}}>{new Date(c.date).toLocaleDateString("en-GB")}</span> — {c.text}
+                        <span style={{color:"var(--accent)",fontFamily:"'DM Mono',monospace"}}>{new Date(c.date).toLocaleDateString("en-GB")}</span> — {c.text}
                       </div>
                     ))}
                   </div>
@@ -2651,7 +2485,7 @@ function ColorPicker({ value, onChange }){
           </div>
 
           {/* Current hex display */}
-          <div style={{marginTop:8, fontSize:11, fontFamily:"'JetBrains Mono',monospace",
+          <div style={{marginTop:8, fontSize:11, fontFamily:"'DM Mono',monospace",
             color:"var(--ink3)", textAlign:"center", letterSpacing:".06em"}}>
             {value.toUpperCase()}
           </div>
@@ -2775,7 +2609,6 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
       parts:JSON.parse(localStorage.getItem("pt:parts")||"[]"),
       partTypes:JSON.parse(localStorage.getItem("pt:partTypes")||"[]"),
       materials:JSON.parse(localStorage.getItem("pt:materials")||"[]"),
-      markerSeq:JSON.parse(localStorage.getItem("pt:markerSeq")||"1"),
     };
     const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
     const a=document.createElement("a");
@@ -2795,7 +2628,6 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
         if(d.parts)localStorage.setItem("pt:parts",JSON.stringify(d.parts));
         if(d.partTypes){localStorage.setItem("pt:partTypes",JSON.stringify(d.partTypes));setPartTypes(d.partTypes);}
         if(d.materials){localStorage.setItem("pt:materials",JSON.stringify(d.materials));setMaterials(d.materials);}
-        if(d.markerSeq){localStorage.setItem("pt:markerSeq",JSON.stringify(d.markerSeq));}
         alert("Import successful — please refresh the page.");
       }catch{alert("Could not read file.");}
     };
@@ -2961,7 +2793,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
                     placeholder="Name"
                     onChange={e=>setEditTypeVal(v=>({...v,name:e.target.value}))}
                     onKeyDown={e=>{if(e.key==="Enter")saveType(i);if(e.key==="Escape")setEditTypeIdx(null);}} />
-                  <input className="input" value={editTypeVal.code} style={{width:70,fontFamily:"'JetBrains Mono',monospace"}}
+                  <input className="input" value={editTypeVal.code} style={{width:70,fontFamily:"'DM Mono',monospace"}}
                     placeholder="Code"
                     onChange={e=>setEditTypeVal(v=>({...v,code:e.target.value.toUpperCase()}))}
                     onKeyDown={e=>{if(e.key==="Enter")saveType(i);if(e.key==="Escape")setEditTypeIdx(null);}} />
@@ -2971,7 +2803,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
               ):(
                 <>
                   <span style={{flex:1,fontWeight:500,fontSize:13}}>{t.name}</span>
-                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11,background:"var(--paper2)",
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,background:"var(--paper2)",
                     padding:"2px 7px",borderRadius:4,color:"var(--accent)",fontWeight:700,minWidth:36,
                     textAlign:"center"}}>{t.code}</span>
                   <button className="btn btn-ghost btn-icon" title="Edit"
@@ -2993,7 +2825,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
             <label className="label">Code</label>
             <input className="input" placeholder="e.g. C"
               value={newType.code} onChange={e=>setNewType(v=>({...v,code:e.target.value.toUpperCase()}))}
-              style={{fontFamily:"'JetBrains Mono',monospace"}}
+              style={{fontFamily:"'DM Mono',monospace"}}
               onKeyDown={e=>e.key==="Enter"&&addType()} />
           </div>
           <button className="btn btn-primary" onClick={addType} style={{flexShrink:0}}>+ Add</button>
@@ -3021,7 +2853,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
                     onChange={e=>setEditMatVal(v=>({...v,name:e.target.value}))}
                     onKeyDown={e=>{if(e.key==="Enter")saveMaterial(m.id);if(e.key==="Escape")setEditMatId(null);}} />
                   <input className="input" value={editMatVal.density} type="number"
-                    style={{width:100,fontFamily:"'JetBrains Mono',monospace"}}
+                    style={{width:100,fontFamily:"'DM Mono',monospace"}}
                     placeholder="kg/m³"
                     onChange={e=>setEditMatVal(v=>({...v,density:e.target.value}))}
                     onKeyDown={e=>{if(e.key==="Enter")saveMaterial(m.id);if(e.key==="Escape")setEditMatId(null);}} />
@@ -3031,7 +2863,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
               ):(
                 <>
                   <span style={{flex:1,fontWeight:500,fontSize:13}}>{m.name}</span>
-                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12,background:"var(--paper2)",
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,background:"var(--paper2)",
                     padding:"2px 9px",borderRadius:4,color:"var(--accent)",fontWeight:700,minWidth:80,
                     textAlign:"center"}}>{m.density}</span>
                   <button className="btn btn-ghost btn-icon" title="Edit"
@@ -3053,7 +2885,7 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
             <label className="label">Density (kg/m³)</label>
             <input className="input" type="number" placeholder="e.g. 2700"
               value={newMat.density} onChange={e=>setNewMat(v=>({...v,density:e.target.value}))}
-              style={{fontFamily:"'JetBrains Mono',monospace"}}
+              style={{fontFamily:"'DM Mono',monospace"}}
               onKeyDown={e=>e.key==="Enter"&&addMaterial()} />
           </div>
           <button className="btn btn-primary" onClick={addMaterial} style={{flexShrink:0}}>+ Add</button>
@@ -3090,37 +2922,22 @@ function SettingsPage({ stages, setStages, partTypes, setPartTypes, subprojects,
 
 // ── Root ──────────────────────────────────────────────────────────────────────
 function App(){
-  const [page,         setPage]         = useState("manager");
-  const [stages,       setStages]       = useState([]);
-  const [projects,     setProjects]     = useState([]);
-  const [subprojects,  setSubprojects]  = useState([]);
-  const [parts,        setParts]        = useState([]);
-  const [partTypes,    setPartTypes]    = useState([]);
-  const [materials,    setMaterials]    = useState([]);
-  const [markerSeq,    setMarkerSeq]    = useState(1); // next sequential counter for markerCode
-  const [loaded,       setLoaded]       = useState(false);
+  const [page,        setPage]        = useState("manager");
+  const [stages,      setStages]      = useState([]);
+  const [projects,    setProjects]    = useState([]);
+  const [subprojects, setSubprojects] = useState([]);
+  const [parts,       setParts]       = useState([]);
+  const [partTypes,   setPartTypes]   = useState([]);
+  const [materials,   setMaterials]   = useState([]);
+  const [loaded,      setLoaded]      = useState(false);
 
   useEffect(()=>{
     setStages(lsGet("pt:stages")           || DEFAULT_STAGES);
     setProjects(lsGet("pt:projects")       || []);
     setSubprojects(lsGet("pt:subprojects") || []);
+    setParts(lsGet("pt:parts")             || []);
     setPartTypes(lsGet("pt:partTypes")     || DEFAULT_PART_TYPES);
     setMaterials(lsGet("pt:materials")     || DEFAULT_MATERIALS);
-
-    // Load parts, then migrate any without markerCode (assign sequential codes).
-    const rawParts = lsGet("pt:parts") || [];
-    let seq = lsGet("pt:markerSeq") || 1;
-    const usedCodes = new Set(rawParts.filter(p=>p.markerCode).map(p=>p.markerCode));
-    const migrated = rawParts.map(p=>{
-      if(p.markerCode) return p;
-      // assign next unused code
-      let code;
-      do { code = markerSeqToCode(seq++); } while(usedCodes.has(code));
-      usedCodes.add(code);
-      return {...p, markerCode: code};
-    });
-    setParts(migrated);
-    setMarkerSeq(seq);
     setLoaded(true);
   },[]);
 
@@ -3130,11 +2947,10 @@ function App(){
   useEffect(()=>{ if(loaded) lsSet("pt:parts",       parts);       },[parts,       loaded]);
   useEffect(()=>{ if(loaded) lsSet("pt:partTypes",   partTypes);   },[partTypes,   loaded]);
   useEffect(()=>{ if(loaded) lsSet("pt:materials",   materials);   },[materials,   loaded]);
-  useEffect(()=>{ if(loaded) lsSet("pt:markerSeq",   markerSeq);   },[markerSeq,   loaded]);
 
   if(!loaded) return <div style={{padding:48,textAlign:"center",color:"#888"}}>Loading…</div>;
 
-  const base = { stages, setStages, projects, setProjects, subprojects, setSubprojects, parts, setParts, partTypes, setPartTypes, materials, setMaterials, markerSeq, setMarkerSeq };
+  const base = { stages, setStages, projects, setProjects, subprojects, setSubprojects, parts, setParts, partTypes, setPartTypes, materials, setMaterials };
 
   return (
     <div className="app">

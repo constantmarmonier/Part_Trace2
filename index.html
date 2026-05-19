@@ -349,7 +349,9 @@ function QRImg({ value, size=60 }){
       correctLevel: window.QRCode.CorrectLevel.M,
     });
   },[value,size]);
-  return <div ref={el} style={{display:"inline-flex",lineHeight:0,borderRadius:4,overflow:"hidden"}} />;
+  // Pure white "quiet zone" padding around the QR, and NO border-radius / overflow:hidden
+  // — both were clipping the corner finder patterns and breaking scanner detection.
+  return <div ref={el} style={{display:"inline-flex",lineHeight:0,background:"#fff",padding:8}} />;
 }
 
 // ── Barcode scanner modal ─────────────────────────────────────────────────────
@@ -2434,7 +2436,7 @@ function WorkshopPage({ stages, projects, subprojects, parts, setParts, material
                 <div style={{display:"flex",gap:16,marginBottom:12,alignItems:"flex-start"}}>
                   <div style={{flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",gap:4,
                     padding:"8px",background:"var(--paper)",borderRadius:8,border:"1px solid var(--paper3)"}}>
-                    <QRImg value={part.id} size={100} />
+                    <QRImg value={part.id} size={140} />
                     <span style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:isOnHold?"var(--ink3)":"var(--accent)",fontWeight:700}}>
                       {getPartId(part,projects,subprojects)}
                     </span>

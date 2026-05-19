@@ -224,7 +224,7 @@ button:disabled{opacity:.35;cursor:not-allowed}
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.22/dist/occt-import-js.min.js"></script>
 
@@ -367,40 +367,61 @@ function Scanner({ onFound, onClose }){
 
   useEffect(()=>{
     mountedRef.current = true;
-    if(!window.jsQR){
-      setErrorMsg("QR decoder library failed to load. Check your internet connection.");
-      setStatus("error"); return;
-    }
-    if(!navigator.mediaDevices?.getUserMedia){
-      setErrorMsg("Your browser doesn't support camera access. Try Chrome, Firefox or Safari.");
-      setStatus("error"); return;
-    }
-    // file:// or plain http (non-localhost) blocks getUserMedia on most browsers
-    if(location.protocol!=="https:" && location.hostname!=="localhost" && location.hostname!=="127.0.0.1"){
-      setErrorMsg(`Camera access requires HTTPS or localhost (current: ${location.protocol}//${location.hostname||"file"}). Open the page on a secure server, or use the manual entry option below.`);
-      setStatus("error"); return;
+    let cancelled = false;
+
+    // Load jsQR — try fallback CDN if the head <script> didn't load
+    function ensureJsQR(){
+      if(window.jsQR) return Promise.resolve(true);
+      return new Promise(res=>{
+        const s = document.createElement("script");
+        s.src = "https://unpkg.com/jsqr@1.4.0/dist/jsQR.js";
+        s.onload  = ()=>res(!!window.jsQR);
+        s.onerror = ()=>res(false);
+        document.head.appendChild(s);
+      });
     }
 
-    navigator.mediaDevices.getUserMedia({video:{facingMode:"environment",width:{ideal:1280}}})
-      .then(stream=>{
-        if(!mountedRef.current){ stream.getTracks().forEach(t=>t.stop()); return; }
-        streamRef.current=stream;
-        if(videoRef.current){
-          videoRef.current.srcObject=stream;
-          videoRef.current.play().catch(()=>{}); // ignored — autoplay edge case
-        }
-        setStatus("scanning");
-        rafRef.current=requestAnimationFrame(tick);
-      })
-      .catch(err=>{
-        let msg = "Camera not available.";
-        if(err?.name==="NotAllowedError")      msg = "Camera permission denied. Allow camera access in your browser settings, then try again.";
-        else if(err?.name==="NotFoundError")   msg = "No camera found on this device.";
-        else if(err?.name==="NotReadableError")msg = "Camera is in use by another app. Close other apps using the camera and retry.";
-        else if(err?.message)                  msg = `Camera error: ${err.message}`;
-        setErrorMsg(msg);
-        setStatus("error");
-      });
+    ensureJsQR().then(ok=>{
+      if(cancelled) return;
+      if(!ok){
+        setErrorMsg("QR decoder library couldn't load from any CDN. Check your network connection or use manual entry below.");
+        setStatus("error"); return;
+      }
+      startCamera();
+    });
+
+    function startCamera(){
+      if(!navigator.mediaDevices?.getUserMedia){
+        setErrorMsg("Your browser doesn't support camera access. Try Chrome, Firefox or Safari.");
+        setStatus("error"); return;
+      }
+      // file:// or plain http (non-localhost) blocks getUserMedia on most browsers
+      if(location.protocol!=="https:" && location.hostname!=="localhost" && location.hostname!=="127.0.0.1"){
+        setErrorMsg(`Camera access requires HTTPS or localhost (current: ${location.protocol}//${location.hostname||"file"}). Open the page on a secure server, or use the manual entry option below.`);
+        setStatus("error"); return;
+      }
+
+      navigator.mediaDevices.getUserMedia({video:{facingMode:"environment",width:{ideal:1280}}})
+        .then(stream=>{
+          if(!mountedRef.current){ stream.getTracks().forEach(t=>t.stop()); return; }
+          streamRef.current=stream;
+          if(videoRef.current){
+            videoRef.current.srcObject=stream;
+            videoRef.current.play().catch(()=>{}); // ignored — autoplay edge case
+          }
+          setStatus("scanning");
+          rafRef.current=requestAnimationFrame(tick);
+        })
+        .catch(err=>{
+          let msg = "Camera not available.";
+          if(err?.name==="NotAllowedError")      msg = "Camera permission denied. Allow camera access in your browser settings, then try again.";
+          else if(err?.name==="NotFoundError")   msg = "No camera found on this device.";
+          else if(err?.name==="NotReadableError")msg = "Camera is in use by another app. Close other apps using the camera and retry.";
+          else if(err?.message)                  msg = `Camera error: ${err.message}`;
+          setErrorMsg(msg);
+          setStatus("error");
+        });
+    }
 
     function tick(){
       const v=videoRef.current, c=canvasRef.current;
@@ -418,7 +439,7 @@ function Scanner({ onFound, onClose }){
       }
       rafRef.current=requestAnimationFrame(tick);
     }
-    return ()=>{ mountedRef.current=false; stop(); };
+    return ()=>{ cancelled=true; mountedRef.current=false; stop(); };
     // eslint-disable-next-line
   },[]);
 
